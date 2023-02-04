@@ -159,7 +159,7 @@ struct Navegacion: View {
                     },
                     checkpoints: navegacionViewModel.checkpoints,
                     key: "SearchView")
-            .frame(height: UIScreen.main.bounds.height)
+            
             
             
             Button(action: {
