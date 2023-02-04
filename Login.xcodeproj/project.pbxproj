@@ -13,6 +13,8 @@
 		C17BCF9D298DDC70005746C2 /* Navegacion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BCF96298DDC6F005746C2 /* Navegacion.swift */; };
 		C17BCF9E298DDC70005746C2 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BCF97298DDC6F005746C2 /* Main.swift */; };
 		C17BCFA2298DDC77005746C2 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BCFA1298DDC77005746C2 /* ViewModel.swift */; };
+		C1C103BF298E217B006AD2D1 /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C103BE298E217B006AD2D1 /* LocationDataManager.swift */; };
+		C1C103C1298E35D0006AD2D1 /* CoreLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C103C0298E35D0006AD2D1 /* CoreLocationView.swift */; };
 		F72F40BB298B38EC00B20073 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72F40BA298B38EC00B20073 /* AppDelegate.swift */; };
 		F7BCA992298333D000EB462B /* LoginApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BCA991298333D000EB462B /* LoginApp.swift */; };
 		F7BCA994298333D000EB462B /* AuthContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BCA993298333D000EB462B /* AuthContentView.swift */; };
@@ -32,6 +34,8 @@
 		C17BCF96298DDC6F005746C2 /* Navegacion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navegacion.swift; sourceTree = "<group>"; };
 		C17BCF97298DDC6F005746C2 /* Main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		C17BCFA1298DDC77005746C2 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		C1C103BE298E217B006AD2D1 /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
+		C1C103C0298E35D0006AD2D1 /* CoreLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationView.swift; sourceTree = "<group>"; };
 		F72F40BA298B38EC00B20073 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F7BCA98E298333D000EB462B /* Login.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Login.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7BCA991298333D000EB462B /* LoginApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginApp.swift; sourceTree = "<group>"; };
@@ -74,6 +78,7 @@
 				C17BCF95298DDC6F005746C2 /* Fondo.swift */,
 				C17BCF96298DDC6F005746C2 /* Navegacion.swift */,
 				C17BCF97298DDC6F005746C2 /* Main.swift */,
+				C1C103C0298E35D0006AD2D1 /* CoreLocationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -81,6 +86,7 @@
 		C17BCFA0298DDC77005746C2 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				C1C103BE298E217B006AD2D1 /* LocationDataManager.swift */,
 				C17BCFA1298DDC77005746C2 /* ViewModel.swift */,
 			);
 			path = ViewModel;
@@ -205,10 +211,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1C103C1298E35D0006AD2D1 /* CoreLocationView.swift in Sources */,
 				C17BCF9E298DDC70005746C2 /* Main.swift in Sources */,
 				C17BCF9B298DDC70005746C2 /* Splash.swift in Sources */,
 				F72F40BB298B38EC00B20073 /* AppDelegate.swift in Sources */,
 				F7BCA994298333D000EB462B /* AuthContentView.swift in Sources */,
+				C1C103BF298E217B006AD2D1 /* LocationDataManager.swift in Sources */,
 				C17BCF9C298DDC70005746C2 /* Fondo.swift in Sources */,
 				F7BCA992298333D000EB462B /* LoginApp.swift in Sources */,
 				C17BCF9D298DDC70005746C2 /* Navegacion.swift in Sources */,
@@ -346,6 +354,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Login/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs to access your location data to tell you your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -376,6 +385,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Login/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs to access your location data to tell you your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

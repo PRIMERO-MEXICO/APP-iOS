@@ -14,7 +14,8 @@ struct AuthContentView: View {
     
     var body: some View {
         VStack {
-            Login()
+            // Login()
+            CoreLocationView()
         }
     }
 }
