@@ -14,7 +14,10 @@ struct MapView: UIViewRepresentable {
     /// What is this for?
     typealias UIViewType = MKMapView
     
-    /// -1.
+    /// Instance of LocationDataManager class, to access LocationDataManager data
+    @StateObject var locationDataManager = LocationDataManager()
+    
+    ///
     @Binding var directions: [String]
     
     /// 0. This is to receive an State which initializes the MapView in an specific Centralized Region
