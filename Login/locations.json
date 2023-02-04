@@ -1,0 +1,40 @@
+{
+  "locations": [
+    {
+      "id": 0,
+      "name": "Bellas Artes",
+      "latitude": 19.4352,
+      "longitude": -99.1412
+    },
+    {
+      "id": 1,
+      "name": "La Casa de los Azulejos",
+      "latitude": 19.4343,
+      "longitude": -99.1402
+    },
+    {
+      "id": 2,
+      "name": "Museo Nacional MUNAL",
+      "latitude": 19.4360,
+      "longitude": -99.1395
+    },
+    {
+      "id": 3,
+      "name": "La Purisima",
+      "latitude": 19.4375,
+      "longitude": -99.1389
+    },
+    {
+      "id": 4,
+      "name": "Plaza Garibaldi",
+      "latitude": 19.4407,
+      "longitude": -99.1394
+    },
+    {
+      "id": 5,
+      "name": "Torre Reforma",
+      "latitude": 19.4244,
+      "longitude": -99.1744
+    }
+  ]
+}

@@ -20,16 +20,6 @@ struct AuthContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        let viewModel = NavegacionViewModel()
-        
-        AuthContentView(viewModel: viewModel)
-
-    }
-}
-
 struct Login: View{
     @State var user = ""
     @State var passwd = ""
@@ -190,3 +180,15 @@ struct LoginError: View{
     }
 }
 
+
+
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        
+        let viewModel = NavegacionViewModel()
+        
+        AuthContentView(viewModel: viewModel)
+
+    }
+}

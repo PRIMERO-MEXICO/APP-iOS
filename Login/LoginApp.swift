@@ -17,7 +17,7 @@ struct LoginApp: App {
     
     var body: some Scene {
         WindowGroup {
-            AuthContentView(viewModel: viewModel)
+            SplashScreenView(viewModel: viewModel)
         }
     }
 }
