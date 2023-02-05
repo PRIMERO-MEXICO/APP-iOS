@@ -17,7 +17,8 @@ struct SplashScreenView: View {
     
     var body: some View {
         if isActive {
-            AuthContentView()
+            // AuthContentView()
+            CoreLocationView()
         } else {
             ZStack {
                 Fondo()
