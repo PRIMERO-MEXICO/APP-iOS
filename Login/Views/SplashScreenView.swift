@@ -13,11 +13,11 @@ struct SplashScreenView: View {
     @State private var isActive = false
     @State private var size = 0.8
     @State private var opacity = 0.5
-    @ObservedObject var viewModel: NavegacionViewModel
+    // @ObservedObject var viewModel: NavegacionViewModel
     
     var body: some View {
         if isActive {
-            AuthContentView(viewModel: viewModel)
+            AuthContentView()
         } else {
             ZStack {
                 Fondo()
@@ -50,8 +50,9 @@ struct SplashScreenView: View {
 struct Splash_Previews: PreviewProvider {
     static var previews: some View {
         
-        let viewModel = NavegacionViewModel()
+        //let viewModel = NavegacionViewModel()
         
-        SplashScreenView(viewModel: viewModel)
+        //SplashScreenView(viewModel: viewModel)
+        SplashScreenView()
     }
 }

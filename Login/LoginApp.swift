@@ -11,13 +11,12 @@ import SwiftUI
 struct LoginApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
     // Inicializamos la clase NavegacionViewModel como un apuntador.
-    let viewModel = NavegacionViewModel()
+    // let viewModel = NavegacionViewModel()
     
     var body: some Scene {
         WindowGroup {
-            SplashScreenView(viewModel: viewModel)
+            SplashScreenView()
         }
     }
 }
