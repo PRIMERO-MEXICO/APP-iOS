@@ -24,11 +24,8 @@ struct NavegacionModelo {
         let locations: [Ubicacion]
     }
 
-    
-    // Initializer para el modelo.
-    // Queremos inicializar la propiedad arreglo ubicaciones.
-    // Los parametros son: el nombre del JSON
-    // Los parametros los pasamos desde el ViewModel.
+    /// Initializer para el modelo. Queremos inicializar la propiedad arreglo ubicaciones.
+    /// Los parametros son: el nombre del JSON. Los parametros los pasamos desde el ViewModel.
     init(JSON jsonName: String) {
         
         ubicaciones = Array<NavegacionModelo.Ubicacion>()

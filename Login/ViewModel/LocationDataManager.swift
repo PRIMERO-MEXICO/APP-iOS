@@ -23,6 +23,7 @@
 import Foundation
 import CoreLocation
 import MapKit
+import SwiftUI
 
 class LocationDataManager: NSObject, ObservableObject {
     
@@ -30,7 +31,9 @@ class LocationDataManager: NSObject, ObservableObject {
     var currentRegion: MKCoordinateRegion?
     var currentPlace: CLPlacemark?
     let completer = MKLocalSearchCompleter()
-    @Published var CampoDeTextoOrigen: String = ""
+    @Published var CampoDeTextoOrigen: String? = ""
+    @Published var stopTextField: String? = ""
+    @Published var extraStopTextField: String? = ""
     @Published var authorizationStatus: CLAuthorizationStatus?
 
     override init() {
@@ -66,6 +69,64 @@ class LocationDataManager: NSObject, ObservableObject {
         default:
             break
         }
+    }
+    
+    // MARK: - Actions
+    func calculateButtonTapped() {
+
+      let segment: RouteBuilder.Segment?
+      if let currentLocation = currentPlace?.location {
+        segment = .location(currentLocation)
+      } else if let originValue = CampoDeTextoOrigen {
+        segment = .text(originValue)
+      } else {
+        segment = nil
+      }
+
+      let stopSegments: [RouteBuilder.Segment] = [
+        stopTextField,
+        extraStopTextField
+      ]
+      .compactMap { contents in
+        if let value = contents {
+          return .text(value)
+        } else {
+          return nil
+        }
+      }
+
+      guard
+        let originSegment = segment,
+        !stopSegments.isEmpty
+        else {
+          return
+      }
+
+      RouteBuilder.buildRoute(
+        origin: originSegment,
+        stops: stopSegments,
+        within: currentRegion
+      ) { result in
+        // self.calculateButton.isEnabled = true
+        // self.activityIndicatorView.stopAnimating()
+
+        switch result {
+        case .success(let route):
+            print("temprary debugger")
+          // let viewController = DirectionsViewController(route: route)
+          // self.present(viewController, animated: true)
+
+        case .failure(let error):
+          let errorMessage: String
+
+          switch error {
+          case .invalidSegment(let reason):
+            errorMessage = "There was an error with: \(reason)."
+          }
+
+          // self.presentAlert(message: errorMessage)
+        }
+      }
     }
 
 }
