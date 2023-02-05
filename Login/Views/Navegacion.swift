@@ -54,11 +54,9 @@ struct MapView: UIViewRepresentable {
 
         // Bellas artes
         let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4343, longitude: -99.1402))
-
-        let request = MKDirections.Request()
-        request.source = MKMapItem(placemark: p1)
-        request.destination = MKMapItem(placemark: p2)
-        request.transportType = .automobile
+        
+        // Function that creates Direction Request
+        let request = createDirectionsRequest(from: p1, to: p2)
 
         let Directions = MKDirections(request: request)
         Directions.calculate { response, error in
@@ -191,7 +189,24 @@ struct Navegacion: View {
     
     
     
+func createDirectionsRequest(from coordinateFrom: MKPlacemark!, to coordinateTo: MKPlacemark!) -> MKDirections.Request {
     
+    let request = MKDirections.Request()
+    request.source = MKMapItem(placemark: coordinateFrom)
+    request.destination = MKMapItem(placemark: coordinateTo)
+    request.transportType = .automobile
+    request.requestsAlternateRoutes = true
+    
+    return request
+}
+
+
+
+
+
+
+
+
     
     
 

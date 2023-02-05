@@ -22,19 +22,28 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 
-class LocationDataManager : NSObject, CLLocationManagerDelegate, ObservableObject {
+class LocationDataManager: NSObject, ObservableObject {
     
     var locationManager = CLLocationManager()
-    
+    var currentRegion: MKCoordinateRegion?
+    var currentPlace: CLPlacemark?
+    let completer = MKLocalSearchCompleter()
+    @Published var CampoDeTextoOrigen: String = ""
     @Published var authorizationStatus: CLAuthorizationStatus?
 
     override init() {
         super.init()
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.delegate = self
     }
 
+    // MARK: - Helpers
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+
+        // guard CLLocationManager.locationServicesEnabled() else { return }
+        
         switch manager.authorizationStatus {
         case .authorizedWhenInUse:
             authorizationStatus = .authorizedWhenInUse
@@ -58,14 +67,44 @@ class LocationDataManager : NSObject, CLLocationManagerDelegate, ObservableObjec
             break
         }
     }
-    
-    // delegate functions:
+
+}
+
+// MARK: - delegate functions:
+extension LocationDataManager: CLLocationManagerDelegate {
     // 1. instance method that will tell our delegate that new location data is available
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // Insert code to handle location updates
+        guard let firstLocation = locations.first else {
+            return
+        }
+        
+        let commonDelta: CLLocationDegrees = 25 / 111 // 1/111 = 1 latitude km
+        let span = MKCoordinateSpan(latitudeDelta: commonDelta, longitudeDelta: commonDelta)
+        let region = MKCoordinateRegion(center: firstLocation.coordinate, span: span)
+
+        currentRegion = region
+        completer.region = region
+
+        CLGeocoder().reverseGeocodeLocation(firstLocation) { places, _ in
+          guard let firstPlace = places?.first, self.CampoDeTextoOrigen == "" else {
+            return
+          }
+
+          self.currentPlace = firstPlace
+            self.CampoDeTextoOrigen = firstPlace.name!
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("error: \(error.localizedDescription)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+      guard status == .authorizedWhenInUse else {
+        return
+      }
+
+      manager.requestLocation()
     }
 }

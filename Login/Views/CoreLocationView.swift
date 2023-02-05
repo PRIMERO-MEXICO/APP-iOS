@@ -16,6 +16,10 @@ struct CoreLocationView: View {
             switch locationDataManager.locationManager.authorizationStatus {
             case .authorizedWhenInUse:
                 Text("Your current location is:")
+                Text("\(locationDataManager.CampoDeTextoOrigen)")
+                
+                // cuando esto esté sucediendo queremos guardar en FireBase las coordenadas: latitude & longitude
+                
                 Text("Latitude: \(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error loading")")
                 Text("Longitude: \(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error loading")")
     
