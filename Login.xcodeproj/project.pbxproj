@@ -16,6 +16,9 @@
 		C1C103BF298E217B006AD2D1 /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C103BE298E217B006AD2D1 /* LocationDataManager.swift */; };
 		C1C103C1298E35D0006AD2D1 /* CoreLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C103C0298E35D0006AD2D1 /* CoreLocationView.swift */; };
 		C1C103C3298EEF37006AD2D1 /* locations.json in Resources */ = {isa = PBXBuildFile; fileRef = C1C103C2298EEF37006AD2D1 /* locations.json */; };
+		C1C103C829903B83006AD2D1 /* RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C103C729903B83006AD2D1 /* RouteBuilder.swift */; };
+		C1C103CA29903DEA006AD2D1 /* RouteAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C103C929903DEA006AD2D1 /* RouteAnnotation.swift */; };
+		C1C103CC29903DEE006AD2D1 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C103CB29903DEE006AD2D1 /* Route.swift */; };
 		F72F40BB298B38EC00B20073 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72F40BA298B38EC00B20073 /* AppDelegate.swift */; };
 		F7BCA992298333D000EB462B /* LoginApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BCA991298333D000EB462B /* LoginApp.swift */; };
 		F7BCA994298333D000EB462B /* AuthContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BCA993298333D000EB462B /* AuthContentView.swift */; };
@@ -38,6 +41,9 @@
 		C1C103BE298E217B006AD2D1 /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
 		C1C103C0298E35D0006AD2D1 /* CoreLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationView.swift; sourceTree = "<group>"; };
 		C1C103C2298EEF37006AD2D1 /* locations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = locations.json; sourceTree = "<group>"; };
+		C1C103C729903B83006AD2D1 /* RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteBuilder.swift; sourceTree = "<group>"; };
+		C1C103C929903DEA006AD2D1 /* RouteAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteAnnotation.swift; sourceTree = "<group>"; };
+		C1C103CB29903DEE006AD2D1 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		F72F40BA298B38EC00B20073 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F7BCA98E298333D000EB462B /* Login.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Login.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7BCA991298333D000EB462B /* LoginApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginApp.swift; sourceTree = "<group>"; };
@@ -66,6 +72,8 @@
 		C17BCF8E298DDC67005746C2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C1C103C929903DEA006AD2D1 /* RouteAnnotation.swift */,
+				C1C103CB29903DEE006AD2D1 /* Route.swift */,
 				F72F40BA298B38EC00B20073 /* AppDelegate.swift */,
 				C17BCF8F298DDC67005746C2 /* Model.swift */,
 			);
@@ -94,6 +102,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		C1C103C629903B77006AD2D1 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C1C103C729903B83006AD2D1 /* RouteBuilder.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		F7BCA985298333D000EB462B = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +133,7 @@
 				F7F126102989BF1F00A2E532 /* GoogleService-Info.plist */,
 				F7BCA991298333D000EB462B /* LoginApp.swift */,
 				C1C103C2298EEF37006AD2D1 /* locations.json */,
+				C1C103C629903B77006AD2D1 /* Helpers */,
 				C17BCFA0298DDC77005746C2 /* ViewModel */,
 				C17BCF91298DDC6F005746C2 /* Views */,
 				C17BCF8E298DDC67005746C2 /* Model */,
@@ -220,8 +237,11 @@
 				C17BCF9B298DDC70005746C2 /* SplashScreenView.swift in Sources */,
 				F72F40BB298B38EC00B20073 /* AppDelegate.swift in Sources */,
 				F7BCA994298333D000EB462B /* AuthContentView.swift in Sources */,
+				C1C103CC29903DEE006AD2D1 /* Route.swift in Sources */,
 				C1C103BF298E217B006AD2D1 /* LocationDataManager.swift in Sources */,
 				C17BCF9C298DDC70005746C2 /* Fondo.swift in Sources */,
+				C1C103CA29903DEA006AD2D1 /* RouteAnnotation.swift in Sources */,
+				C1C103C829903B83006AD2D1 /* RouteBuilder.swift in Sources */,
 				F7BCA992298333D000EB462B /* LoginApp.swift in Sources */,
 				C17BCF9D298DDC70005746C2 /* Navegacion.swift in Sources */,
 				C17BCFA2298DDC77005746C2 /* ViewModel.swift in Sources */,
