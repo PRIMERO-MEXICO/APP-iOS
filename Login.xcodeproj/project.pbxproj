@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C12639652990AA4200EDC9CA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C12639642990AA4200EDC9CA /* FirebaseAnalytics */; };
 		C17BCF90298DDC67005746C2 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BCF8F298DDC67005746C2 /* Model.swift */; };
 		C17BCF9B298DDC70005746C2 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BCF94298DDC6F005746C2 /* SplashScreenView.swift */; };
 		C17BCF9C298DDC70005746C2 /* Fondo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BCF95298DDC6F005746C2 /* Fondo.swift */; };
 		C17BCF9D298DDC70005746C2 /* Navegacion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BCF96298DDC6F005746C2 /* Navegacion.swift */; };
 		C17BCF9E298DDC70005746C2 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BCF97298DDC6F005746C2 /* Main.swift */; };
 		C17BCFA2298DDC77005746C2 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BCFA1298DDC77005746C2 /* ViewModel.swift */; };
+		C195E08F29918A4100F4DE8B /* Navegacion2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C195E08E29918A4100F4DE8B /* Navegacion2.swift */; };
 		C1C103BF298E217B006AD2D1 /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C103BE298E217B006AD2D1 /* LocationDataManager.swift */; };
 		C1C103C1298E35D0006AD2D1 /* CoreLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C103C0298E35D0006AD2D1 /* CoreLocationView.swift */; };
 		C1C103C3298EEF37006AD2D1 /* locations.json in Resources */ = {isa = PBXBuildFile; fileRef = C1C103C2298EEF37006AD2D1 /* locations.json */; };
@@ -38,6 +40,7 @@
 		C17BCF96298DDC6F005746C2 /* Navegacion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navegacion.swift; sourceTree = "<group>"; };
 		C17BCF97298DDC6F005746C2 /* Main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		C17BCFA1298DDC77005746C2 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		C195E08E29918A4100F4DE8B /* Navegacion2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navegacion2.swift; sourceTree = "<group>"; };
 		C1C103BE298E217B006AD2D1 /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
 		C1C103C0298E35D0006AD2D1 /* CoreLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationView.swift; sourceTree = "<group>"; };
 		C1C103C2298EEF37006AD2D1 /* locations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = locations.json; sourceTree = "<group>"; };
@@ -62,6 +65,7 @@
 				F7F1260F2989BA4E00A2E532 /* FirebaseDatabaseSwift in Frameworks */,
 				F7F1260D2989BA4E00A2E532 /* FirebaseDatabase in Frameworks */,
 				F7F126092989BA4E00A2E532 /* FirebaseAuth in Frameworks */,
+				C12639652990AA4200EDC9CA /* FirebaseAnalytics in Frameworks */,
 				F7F1260B2989BA4E00A2E532 /* FirebaseAuthCombine-Community in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -89,6 +93,7 @@
 				C17BCF96298DDC6F005746C2 /* Navegacion.swift */,
 				C17BCF97298DDC6F005746C2 /* Main.swift */,
 				C1C103C0298E35D0006AD2D1 /* CoreLocationView.swift */,
+				C195E08E29918A4100F4DE8B /* Navegacion2.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -105,6 +110,7 @@
 		C1C103C629903B77006AD2D1 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C1C103C2298EEF37006AD2D1 /* locations.json */,
 				C1C103C729903B83006AD2D1 /* RouteBuilder.swift */,
 			);
 			path = Helpers;
@@ -132,7 +138,6 @@
 				F7F126122989BF6800A2E532 /* Info.plist */,
 				F7F126102989BF1F00A2E532 /* GoogleService-Info.plist */,
 				F7BCA991298333D000EB462B /* LoginApp.swift */,
-				C1C103C2298EEF37006AD2D1 /* locations.json */,
 				C1C103C629903B77006AD2D1 /* Helpers */,
 				C17BCFA0298DDC77005746C2 /* ViewModel */,
 				C17BCF91298DDC6F005746C2 /* Views */,
@@ -172,6 +177,7 @@
 				F7F1260A2989BA4E00A2E532 /* FirebaseAuthCombine-Community */,
 				F7F1260C2989BA4E00A2E532 /* FirebaseDatabase */,
 				F7F1260E2989BA4E00A2E532 /* FirebaseDatabaseSwift */,
+				C12639642990AA4200EDC9CA /* FirebaseAnalytics */,
 			);
 			productName = Login;
 			productReference = F7BCA98E298333D000EB462B /* Login.app */;
@@ -240,6 +246,7 @@
 				C1C103CC29903DEE006AD2D1 /* Route.swift in Sources */,
 				C1C103BF298E217B006AD2D1 /* LocationDataManager.swift in Sources */,
 				C17BCF9C298DDC70005746C2 /* Fondo.swift in Sources */,
+				C195E08F29918A4100F4DE8B /* Navegacion2.swift in Sources */,
 				C1C103CA29903DEA006AD2D1 /* RouteAnnotation.swift in Sources */,
 				C1C103C829903B83006AD2D1 /* RouteBuilder.swift in Sources */,
 				F7BCA992298333D000EB462B /* LoginApp.swift in Sources */,
@@ -463,6 +470,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C12639642990AA4200EDC9CA /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F7F126072989BA4E00A2E532 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
 		F7F126082989BA4E00A2E532 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F7F126072989BA4E00A2E532 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

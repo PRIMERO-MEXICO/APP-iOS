@@ -41,6 +41,8 @@ class LocationDataManager: NSObject, ObservableObject {
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.delegate = self
     }
+    
+    
 
     // MARK: - Helpers
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
