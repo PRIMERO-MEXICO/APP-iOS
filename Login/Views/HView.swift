@@ -9,6 +9,12 @@ import Foundation
 import SwiftUI
 
 struct HView: View {
+    
+    @ObservedObject var navegacionViewModel = NavegacionViewModel()
+    @State var user: String
+    @State var isLogin: Bool
+    @State var uid: String
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -56,7 +62,9 @@ struct HView: View {
                     .frame(width: 100, height: 50)
         
                     
-                    NavigationLink(destination: CoreLocationView()) {
+                    NavigationLink(destination: Navegacion2(uid: self.uid,
+                                                            user: self.user,
+                                                            isLogin: self.isLogin)) {
                         MenuDesign(text: "rutas de traslado", icon: "mappin.square", color: Color(red: 255 / 255, green: 255 / 255, blue: 204 / 255))
                         
                     }
@@ -199,9 +207,3 @@ struct ComingSoonView: View {
 
 
 
-
-struct cv: PreviewProvider {
-    static var previews: some View {
-        HView()
-    }
-}

@@ -9,11 +9,8 @@ import SwiftUI
 
 // View para Main
 struct Main: View {
-    
-    // guarda el nombre de usuario a lo largo de su sesión
+
     @State var user: String
-    
-    // guarda el estado de sesión T/F
     @State var isLogin: Bool
     
     var body: some View {
