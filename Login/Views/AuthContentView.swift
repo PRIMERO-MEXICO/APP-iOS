@@ -201,17 +201,3 @@ struct ContentView_Previews: PreviewProvider {
 
     }
 }
-
-
-/*
- Directions.calculate { response, error in
-     guard let route = response?.routes.first else { return }
-     map.addAnnotations([P1, P2])
-     map.addOverlay(route.polyline)
-     map.setVisibleMapRect(
-         route.polyline.boundingMapRect,
-         edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
-         animated: true)
-     directions = route.steps.map { $0.instructions }.filter { !$0.isEmpty }
- }
- */
