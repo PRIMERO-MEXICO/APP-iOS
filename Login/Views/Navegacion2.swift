@@ -20,6 +20,7 @@ struct Navegacion2: View {
     @State private var paradaUno: String = ""
     @State private var paradaDos: String = ""
     @State var tmpMKMapItem: MKMapItem
+    @State var tmpMKMapItem2: MKMapItem
     
     var body: some View {
         NavigationView {
@@ -95,22 +96,76 @@ struct Navegacion2: View {
                                     .padding(.bottom, 10)
                             }
                             
-                            if paradaUno != "" {
-                                NavigationLink(destination: Busqueda(uid: self.uid,
-                                                                     user: self.user,
-                                                                     isLogin: self.isLogin)
-                                                                     //textoBusqueda: paradaUno
-                                    .navigationBarTitle("", displayMode: .inline)) {
-                                        Text("Buscar")
-                                            .frame(width: 250, height: 40, alignment: .center)
-                                            .background(Color.blue.opacity(0.9), in: RoundedRectangle(cornerRadius: 6))
-                                            .padding(.top, -5)
-                                            .foregroundColor(.white)
-                                    }
+                            if paradaUno != "", String(tmpMKMapItem.name!) == "Unknown Location" {
+                                if String(tmpMKMapItem2.name!) != "Unknown Location" {
+                                    NavigationLink(destination: Busqueda(uid: self.uid,
+                                                                         user: self.user,
+                                                                         isLogin: self.isLogin,
+                                                                         tmpMKMapItem: MKMapItem(),
+                                                                         tmpMKMapItem2: self.tmpMKMapItem2)
+                                        .navigationBarTitle("", displayMode: .inline)) {
+                                            Text("Buscar")
+                                                .frame(width: 250, height: 40, alignment: .center)
+                                                .background(Color.blue.opacity(0.9), in: RoundedRectangle(cornerRadius: 6))
+                                                .padding(.top, -5)
+                                                .foregroundColor(.white)
+                                        }
+                                } else {
+                                    NavigationLink(destination: Busqueda(uid: self.uid,
+                                                                         user: self.user,
+                                                                         isLogin: self.isLogin,
+                                                                         tmpMKMapItem: MKMapItem(),
+                                                                         tmpMKMapItem2: MKMapItem())
+                                        .navigationBarTitle("", displayMode: .inline)) {
+                                            Text("Buscar")
+                                                .frame(width: 250, height: 40, alignment: .center)
+                                                .background(Color.blue.opacity(0.9), in: RoundedRectangle(cornerRadius: 6))
+                                                .padding(.top, -5)
+                                                .foregroundColor(.white)
+                                        }
+                                }
                             }
-                                               
-                            TextField("Segunda parada", text: $paradaDos)
-                                .disableAutocorrection(true)
+                            
+                            if String(tmpMKMapItem2.name!) == "Unknown Location" {
+                                TextField("Segunda parada", text: $paradaDos)
+                                    .disableAutocorrection(true)
+                                    .padding(.bottom, 10)
+                                
+                            } else {
+                                Text("\(tmpMKMapItem2.name!)")
+                                    .padding(.bottom, 10)
+                            }
+                            
+                            if paradaDos != "", String(tmpMKMapItem2.name!) == "Unknown Location" {
+                                if String(tmpMKMapItem.name!) != "Unknown Location" {
+                                    NavigationLink(destination: Busqueda(uid: self.uid,
+                                                                         user: self.user,
+                                                                         isLogin: self.isLogin,
+                                                                         tmpMKMapItem: self.tmpMKMapItem,
+                                                                         tmpMKMapItem2: MKMapItem())
+                                        .navigationBarTitle("", displayMode: .inline)) {
+                                            Text("Buscar")
+                                                .frame(width: 250, height: 40, alignment: .center)
+                                                .background(Color.blue.opacity(0.9), in: RoundedRectangle(cornerRadius: 6))
+                                                .padding(.top, -5)
+                                                .foregroundColor(.white)
+                                        }
+                                } else {
+                                    NavigationLink(destination: Busqueda(uid: self.uid,
+                                                                         user: self.user,
+                                                                         isLogin: self.isLogin,
+                                                                         tmpMKMapItem: MKMapItem(),
+                                                                         tmpMKMapItem2: MKMapItem())
+                                        .navigationBarTitle("", displayMode: .inline)) {
+                                            Text("Buscar")
+                                                .frame(width: 250, height: 40, alignment: .center)
+                                                .background(Color.blue.opacity(0.9), in: RoundedRectangle(cornerRadius: 6))
+                                                .padding(.top, -5)
+                                                .foregroundColor(.white)
+                                        }
+                                }
+                            }
+                            
                             
                             if tag != "" {
                                 NavigationLink(destination: Navegacion(uid: self.uid,
@@ -163,6 +218,7 @@ struct Navegacion2_Previews: PreviewProvider {
         let u: String = "nombre"
         let l: Bool = true
         let tmp = MKMapItem()
-        Navegacion2(uid: uid, user: u, isLogin: l, tmpMKMapItem: tmp)
+        let tmp2 = MKMapItem()
+        Navegacion2(uid: uid, user: u, isLogin: l, tmpMKMapItem: tmp, tmpMKMapItem2: tmp2)
     }
 }

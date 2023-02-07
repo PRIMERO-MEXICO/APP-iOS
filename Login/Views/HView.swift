@@ -65,7 +65,8 @@ struct HView: View {
                     
                     NavigationLink(destination: Navegacion2(uid: self.uid,
                                                             user: self.user,
-                                                            isLogin: self.isLogin, tmpMKMapItem: MKMapItem())) {
+                                                            isLogin: self.isLogin, tmpMKMapItem: MKMapItem(), tmpMKMapItem2: MKMapItem())
+                                                           ){
                         MenuDesign(text: "rutas de traslado", icon: "mappin.square", color: Color(red: 255 / 255, green: 255 / 255, blue: 204 / 255))
                         
                     }

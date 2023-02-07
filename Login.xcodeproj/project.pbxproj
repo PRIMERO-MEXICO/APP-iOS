@@ -90,8 +90,8 @@
 				F7BCA993298333D000EB462B /* AuthContentView.swift */,
 				F4B7355A2991C6E900E47F6C /* HView.swift */,
 				C17BCF96298DDC6F005746C2 /* Navegacion.swift */,
-				C1AAB4802992450A0029316A /* Busqueda.swift */,
 				C195E08E29918A4100F4DE8B /* Navegacion2.swift */,
+				C1AAB4802992450A0029316A /* Busqueda.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

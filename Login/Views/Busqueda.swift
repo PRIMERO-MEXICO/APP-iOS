@@ -1,6 +1,6 @@
 import SwiftUI
 import Combine
-
+import MapKit
 struct Busqueda: View {
     
     @StateObject private var locationManager = LocationManager.shared
@@ -9,11 +9,36 @@ struct Busqueda: View {
     @State var uid: String
     @State var user: String
     @State var isLogin: Bool
+    @State var tmpMKMapItem: MKMapItem
+    @State var tmpMKMapItem2: MKMapItem
     @State var seleccionar: Bool = false
     
     var body: some View {
         if seleccionar {
-            Navegacion2(uid: self.uid, user: self.user, isLogin: self.isLogin, tmpMKMapItem: vm.placeTemporary)
+            if String(tmpMKMapItem.name!) != "Unknown Location",
+               String(tmpMKMapItem2.name!) == "Unknown Location" {
+                Navegacion2(uid: self.uid,
+                            user: self.user,
+                            isLogin: self.isLogin,
+                            tmpMKMapItem: self.tmpMKMapItem,
+                            tmpMKMapItem2: vm.placeTemporary)
+            }
+            else if String(tmpMKMapItem.name!) == "Unknown Location",
+                      String(tmpMKMapItem2.name!) != "Unknown Location" {
+                       Navegacion2(uid: self.uid,
+                                   user: self.user,
+                                   isLogin: self.isLogin,
+                                   tmpMKMapItem: vm.placeTemporary,
+                                   tmpMKMapItem2: self.tmpMKMapItem2)
+                   }
+            else if String(tmpMKMapItem.name!) == "Unknown Location",
+                    String(tmpMKMapItem2.name!) == "Unknown Location" {
+                Navegacion2(uid: self.uid,
+                            user: self.user,
+                            isLogin: self.isLogin,
+                            tmpMKMapItem: vm.placeTemporary,
+                            tmpMKMapItem2: self.tmpMKMapItem2)
+            }
         } else {
             VStack {
                 NavigationView {
@@ -39,15 +64,5 @@ struct Busqueda: View {
                 .padding(.top, 20)
             }
         }
-    }
-}
-
-struct Busqueda_Previews: PreviewProvider {
-    static var previews: some View {
-        let uid = "wFN8MaVR6BYt0CbFRVg4161agLJ2"
-        let u: String = "nombre"
-        let l: Bool = true
-        
-        Busqueda(uid: uid, user: u, isLogin: l)
     }
 }
