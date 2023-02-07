@@ -72,64 +72,6 @@ class LocationDataManager: NSObject, ObservableObject {
             break
         }
     }
-    
-    // MARK: - Actions
-    func calculateButtonTapped() {
-
-      let segment: RouteBuilder.Segment?
-      if let currentLocation = currentPlace?.location {
-        segment = .location(currentLocation)
-      } else if let originValue = CampoDeTextoOrigen {
-        segment = .text(originValue)
-      } else {
-        segment = nil
-      }
-
-      let stopSegments: [RouteBuilder.Segment] = [
-        stopTextField,
-        extraStopTextField
-      ]
-      .compactMap { contents in
-        if let value = contents {
-          return .text(value)
-        } else {
-          return nil
-        }
-      }
-
-      guard
-        let originSegment = segment,
-        !stopSegments.isEmpty
-        else {
-          return
-      }
-
-      RouteBuilder.buildRoute(
-        origin: originSegment,
-        stops: stopSegments,
-        within: currentRegion
-      ) { result in
-        // self.calculateButton.isEnabled = true
-        // self.activityIndicatorView.stopAnimating()
-
-        switch result {
-        case .success(let route):
-            print("temprary debugger")
-          // let viewController = DirectionsViewController(route: route)
-          // self.present(viewController, animated: true)
-
-        case .failure(let error):
-          let errorMessage: String
-
-          switch error {
-          case .invalidSegment(let reason):
-            errorMessage = "There was an error with: \(reason)."
-          }
-
-          // self.presentAlert(message: errorMessage)
-        }
-      }
-    }
 
 }
 
@@ -149,6 +91,7 @@ extension LocationDataManager: CLLocationManagerDelegate {
         currentRegion = region
         completer.region = region
 
+        
         CLGeocoder().reverseGeocodeLocation(firstLocation) { places, _ in
           guard let firstPlace = places?.first, self.CampoDeTextoOrigen == "" else {
             return

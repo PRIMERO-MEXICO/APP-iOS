@@ -16,7 +16,6 @@
 		C17BCFA2298DDC77005746C2 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17BCFA1298DDC77005746C2 /* ViewModel.swift */; };
 		C195E08F29918A4100F4DE8B /* Navegacion2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C195E08E29918A4100F4DE8B /* Navegacion2.swift */; };
 		C1C103BF298E217B006AD2D1 /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C103BE298E217B006AD2D1 /* LocationDataManager.swift */; };
-		C1C103C1298E35D0006AD2D1 /* CoreLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C103C0298E35D0006AD2D1 /* CoreLocationView.swift */; };
 		C1C103C3298EEF37006AD2D1 /* locations.json in Resources */ = {isa = PBXBuildFile; fileRef = C1C103C2298EEF37006AD2D1 /* locations.json */; };
 		C1C103C829903B83006AD2D1 /* RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C103C729903B83006AD2D1 /* RouteBuilder.swift */; };
 		C1C103CA29903DEA006AD2D1 /* RouteAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C103C929903DEA006AD2D1 /* RouteAnnotation.swift */; };
@@ -43,7 +42,6 @@
 		C17BCFA1298DDC77005746C2 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		C195E08E29918A4100F4DE8B /* Navegacion2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navegacion2.swift; sourceTree = "<group>"; };
 		C1C103BE298E217B006AD2D1 /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
-		C1C103C0298E35D0006AD2D1 /* CoreLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocationView.swift; sourceTree = "<group>"; };
 		C1C103C2298EEF37006AD2D1 /* locations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = locations.json; sourceTree = "<group>"; };
 		C1C103C729903B83006AD2D1 /* RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteBuilder.swift; sourceTree = "<group>"; };
 		C1C103C929903DEA006AD2D1 /* RouteAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteAnnotation.swift; sourceTree = "<group>"; };
@@ -78,8 +76,6 @@
 		C17BCF8E298DDC67005746C2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C1C103C929903DEA006AD2D1 /* RouteAnnotation.swift */,
-				C1C103CB29903DEE006AD2D1 /* Route.swift */,
 				F72F40BA298B38EC00B20073 /* AppDelegate.swift */,
 				C17BCF8F298DDC67005746C2 /* Model.swift */,
 			);
@@ -89,11 +85,11 @@
 		C17BCF91298DDC6F005746C2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F7BCA993298333D000EB462B /* AuthContentView.swift */,
-				C17BCF94298DDC6F005746C2 /* SplashScreenView.swift */,
 				C17BCF95298DDC6F005746C2 /* Fondo.swift */,
-				C17BCF96298DDC6F005746C2 /* Navegacion.swift */,
+				C17BCF94298DDC6F005746C2 /* SplashScreenView.swift */,
+				F7BCA993298333D000EB462B /* AuthContentView.swift */,
 				C17BCF97298DDC6F005746C2 /* Main.swift */,
+				C17BCF96298DDC6F005746C2 /* Navegacion.swift */,
 				C1C103C0298E35D0006AD2D1 /* CoreLocationView.swift */,
 				F4B7355A2991C6E900E47F6C /* HView.swift */,
 				C195E08E29918A4100F4DE8B /* Navegacion2.swift */,
@@ -114,7 +110,6 @@
 			isa = PBXGroup;
 			children = (
 				C1C103C2298EEF37006AD2D1 /* locations.json */,
-				C1C103C729903B83006AD2D1 /* RouteBuilder.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -247,12 +242,9 @@
 				C17BCF9B298DDC70005746C2 /* SplashScreenView.swift in Sources */,
 				F72F40BB298B38EC00B20073 /* AppDelegate.swift in Sources */,
 				F7BCA994298333D000EB462B /* AuthContentView.swift in Sources */,
-				C1C103CC29903DEE006AD2D1 /* Route.swift in Sources */,
 				C1C103BF298E217B006AD2D1 /* LocationDataManager.swift in Sources */,
 				C17BCF9C298DDC70005746C2 /* Fondo.swift in Sources */,
 				C195E08F29918A4100F4DE8B /* Navegacion2.swift in Sources */,
-				C1C103CA29903DEA006AD2D1 /* RouteAnnotation.swift in Sources */,
-				C1C103C829903B83006AD2D1 /* RouteBuilder.swift in Sources */,
 				F7BCA992298333D000EB462B /* LoginApp.swift in Sources */,
 				C17BCF9D298DDC70005746C2 /* Navegacion.swift in Sources */,
 				C17BCFA2298DDC77005746C2 /* ViewModel.swift in Sources */,
