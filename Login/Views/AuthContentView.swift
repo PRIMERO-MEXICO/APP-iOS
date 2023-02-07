@@ -21,7 +21,7 @@ struct AuthContentView: View {
 
 struct Login: View{
     
-    @State var user = ""
+    @State var user: String = ""
     @State var passwd = ""
     @State var color = Color.black.opacity(0.7)
     @State var visible = false
@@ -33,7 +33,8 @@ struct Login: View{
     
     var body: some View{
         if isLogin {
-            Main(user: self.user, isLogin: true)
+            Navegacion2(user: self.user, isLogin: self.isLogin)
+            // Main(user: self.user, isLogin: true)
         } else {
             ZStack{
                 ZStack(alignment: .center){

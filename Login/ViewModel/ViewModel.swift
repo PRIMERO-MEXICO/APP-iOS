@@ -36,4 +36,6 @@ class NavegacionViewModel: ObservableObject {
     var checkpoints: Array<NavegacionModelo.Checkpoint> {
         get { return model.checkpoints }
     }
+    
+    
 }
