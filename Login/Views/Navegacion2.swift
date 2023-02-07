@@ -12,24 +12,113 @@ import MapKit
 
 struct Navegacion2: View {
     @ObservedObject var navegacionViewModel = NavegacionViewModel()
+    @StateObject var locationDataManager = LocationDataManager()
     @State var user: String
     @State var isLogin: Bool
     @State var tag = ""
+    @State private var paradaUno: String = ""
+    @State private var paradaDos: String = ""
     
     var body: some View {
         NavigationView {
-            VStack {
-                TextField("Tag", text: $tag)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                if tag != "" {
-                    NavigationLink(destination: Navegacion(user: self.user, isLogin: self.isLogin)
-                        .navigationBarTitle("", displayMode: .inline)) {
-                        Text("Navegar")
+            ZStack {
+                Fondo()
+                
+                VStack {
+                    // HEADER
+                    HStack {
+                        Spacer()
+                        Image("LogoPM")
+                            .resizable()
+                            .frame(width: 150, height: 150)
+                            .padding(.horizontal, -10)
+                        VStack {
+                            Image("memoji")
+                                .resizable()
+                                .frame(width: 60, height: 60)
+                                .clipShape(Circle())
+                                .overlay {
+                                    Circle().stroke(.white, lineWidth: 2)
+                                }
+                                .shadow(radius: 5)
+                            ZStack {
+                                Rectangle()
+                                    .frame(width: 60, height: 20)
+                                    .cornerRadius(50)
+                                    .foregroundColor(.black)
+                                    .opacity(0.245)
+                                
+                                Text(self.user)
+                            }
+                        }
+                        .padding(.horizontal, 30)
                     }
+                    .padding(.top, 80)
+                    .padding(.bottom, 80)
+                    
+                    
+                    // BODY
+                    VStack {
+                        // UBICACIÓN INICIAL DEL USUARIO
+                        switch locationDataManager.locationManager.authorizationStatus {
+                        case .authorizedWhenInUse:
+                            Text("Tu ubicación actual es:")
+                            Text("\(locationDataManager.CampoDeTextoOrigen!)")
+                            Text("Latitud: \(locationDataManager.locationManager.location?.coordinate.latitude.description ?? "Error de carga")")
+                            Text("Longitud: \(locationDataManager.locationManager.location?.coordinate.longitude.description ?? "Error de carga")")
+                        case .restricted, .denied:
+                            Text("El acceso a la ubicación actual fue denegada.")
+                        case .notDetermined:
+                            Text("Encontrando tu ubicación...")
+                            ProgressView()
+                        default:
+                            ProgressView()
+                        }
+                        
+                        // PARADA 1 y PARADA 2
+                        
+                        TextField("Marcador de tu ubicación", text: $tag)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .padding(.bottom, 10)
+                            .padding(.top, 20)
+                        
+                        TextField("Primer parada", text: $paradaUno)
+                            .disableAutocorrection(true)
+                            .padding(.bottom, 10)
+                        
+                        TextField("Segunda parada", text: $paradaDos)
+                            .disableAutocorrection(true)
+                        
+                        if tag != "" {
+                            NavigationLink(destination: Navegacion(user: self.user, isLogin: self.isLogin)
+                                .navigationBarTitle("", displayMode: .inline)) {
+                                    Text("Navegar")
+                                        .frame(width: 250, height: 40, alignment: .center)
+                                        .background(Color.blue.opacity(0.9), in: RoundedRectangle(cornerRadius: 6))
+                                        .padding(.top, 20)
+                                        .foregroundColor(.white)
+                                }
+                        }
+                    }
+                    .textFieldStyle(.roundedBorder)
+                    .padding(.horizontal, 50)
+                    .padding(.top, 15)
+                    
+                    Spacer()
+                    
+                    // FOOTER
+                    Button(action: {
+                        self.isLogin.toggle()
+                    }){
+                        Text("Cerrar Sesión")
+                            .foregroundColor(.white)
+                            .frame(width: UIScreen.main.bounds.width - 30)
+                    }
+                    .frame(width: 250, height: 40, alignment: .center)
+                    .background(Color.blue.opacity(0.9), in: RoundedRectangle(cornerRadius: 6))
+                    .padding(.bottom, 30)
                 }
             }
-            .padding()
-            .navigationBarTitle("Traza la ruta")
         }
     }
 }
@@ -41,28 +130,3 @@ struct Navegacion2_Previews: PreviewProvider {
         Navegacion2(user: u, isLogin: l)
     }
 }
-
-
-/*
- 
- // Casa de los azulejos
- let p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4352, longitude: -99.1412))
-
- // Bellas artes
- let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4343, longitude: -99.1402))
- 
- // Function that creates Direction Request
- let request = createDirectionsRequest(from: p1, to: p2)
-
- let Directions = MKDirections(request: request)
- Directions.calculate { response, error in
-     guard let route = response?.routes.first else { return }
-     mapView.addAnnotations([p1, p2])
-     mapView.addOverlay(route.polyline)
-     mapView.setVisibleMapRect(
-         route.polyline.boundingMapRect,
-         edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
-         animated: true)
-     self.directions = route.steps.map { $0.instructions }.filter { !$0.isEmpty }
- }
- */

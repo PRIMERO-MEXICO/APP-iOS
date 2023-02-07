@@ -10,6 +10,8 @@ import MapKit
 import UIKit
 import Firebase
 
+
+
 struct mapView: UIViewRepresentable {
     
     var usuario: String
@@ -19,9 +21,12 @@ struct mapView: UIViewRepresentable {
         center: CLLocationCoordinate2D(latitude: 19.4326, longitude: -99.1332),
         span: MKCoordinateSpan(latitudeDelta: 0.4, longitudeDelta: 0.4)
       )
+    @State private var paradaUno: String = ""
+    @State private var paradaDos: String = ""
+    @State var directions: [String] = []
     
     func makeCoordinator() -> Coordinator {
-        return mapView.Coordinator(parent1: self, user1: self.usuario)
+        return Coordinator(parent1: self, user1: self.usuario)
     }
     
     let map = MKMapView()
@@ -36,6 +41,31 @@ struct mapView: UIViewRepresentable {
         map.showsUserLocation = true
         manager.requestWhenInUseAuthorization()
         map.setRegion(centro, animated: true)
+        
+        
+        // Casa de los azulejos
+        let p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4352, longitude: -99.1412))
+
+        // Bellas artes
+        let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4343, longitude: -99.1402))
+        
+        // Function that creates Direction Request
+        let request = createDirectionsRequest(from: p1, to: p2)
+
+        let Directions = MKDirections(request: request)
+        
+        Directions.calculate { response, error in
+            guard let route = response?.routes.first else { return }
+            map.addAnnotations([p1, p2])
+            map.addOverlay(route.polyline)
+            map.setVisibleMapRect(
+                route.polyline.boundingMapRect,
+                edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
+                animated: true)
+            directions = route.steps.map { $0.instructions }.filter { !$0.isEmpty }
+        }
+        
+        
         return map
     }
     
@@ -43,54 +73,56 @@ struct mapView: UIViewRepresentable {
         uiView.addAnnotations(checkpoints)
     }
     
-    class Coordinator: NSObject, CLLocationManagerDelegate {
-        
-        var parent: mapView
-        var user: String
-        
-        init(parent1: mapView, user1: String) {
-            parent = parent1
-            user = user1
-        }
-        
-        func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-            switch status {
-            case .authorizedWhenInUse:
-                //authorizationStatus = .authorizedWhenInUse
-                //locationManager.requestLocation()
-                break
-                
-            case .restricted, .denied:
-                //authorizationStatus = .denied
-                break
-                
-            case .notDetermined:
-                //authorizationStatus = .notDetermined
-                manager.requestWhenInUseAuthorization()
-                break
-                
-            default:
-                break
-            }
-        }
-        
-        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-            
-            let last = locations.last
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = .systemBlue
+        renderer.lineWidth = 5
+        return renderer
+    }
+    
 
-            //print(last?.coordinate.latitude)
+}
+
+class Coordinator: NSObject, CLLocationManagerDelegate {
+    
+    var parent: mapView
+    var user: String
+    
+    init(parent1: mapView, user1: String) {
+        parent = parent1
+        user = user1
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedWhenInUse:
+            //authorizationStatus = .authorizedWhenInUse
+            //locationManager.requestLocation()
+            break
             
-            let ref: DatabaseReference! = Database.database().reference()
-            ref.child("Users").child(self.user).child("latitud").setValue(last?.coordinate.latitude.description)
-            ref.child("Users").child(self.user).child("longitud").setValue(last?.coordinate.longitude.description)
+        case .restricted, .denied:
+            //authorizationStatus = .denied
+            break
+            
+        case .notDetermined:
+            //authorizationStatus = .notDetermined
+            manager.requestWhenInUseAuthorization()
+            break
+            
+        default:
+            break
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            let renderer = MKPolylineRenderer(overlay: overlay)
-            renderer.strokeColor = .systemBlue
-            renderer.lineWidth = 5
-            return renderer
-        }
+        let last = locations.last
+
+        //print(last?.coordinate.latitude)
+        
+        let ref: DatabaseReference! = Database.database().reference()
+        ref.child("Users").child(self.user).child("latitud").setValue(last?.coordinate.latitude.description)
+        ref.child("Users").child(self.user).child("longitud").setValue(last?.coordinate.longitude.description)
     }
 }
 
