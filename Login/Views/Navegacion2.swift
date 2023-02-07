@@ -7,7 +7,7 @@
 
 import SwiftUI
 import MapKit
-
+import Combine
 
 
 struct Navegacion2: View {
@@ -19,6 +19,7 @@ struct Navegacion2: View {
     @State var tag = ""
     @State private var paradaUno: String = ""
     @State private var paradaDos: String = ""
+    @State var tmpMKMapItem: MKMapItem
     
     var body: some View {
         NavigationView {
@@ -84,10 +85,30 @@ struct Navegacion2: View {
                                 .padding(.bottom, 10)
                                 .padding(.top, 20)
                             
-                            TextField("Primer parada", text: $paradaUno)
-                                .disableAutocorrection(true)
-                                .padding(.bottom, 10)
+                            if String(tmpMKMapItem.name!) == "Unknown Location" {
+                                TextField("Primer parada", text: $paradaUno)
+                                    .disableAutocorrection(true)
+                                    .padding(.bottom, 10)
+                                
+                            } else {
+                                Text("\(tmpMKMapItem.name!)")
+                                    .padding(.bottom, 10)
+                            }
                             
+                            if paradaUno != "" {
+                                NavigationLink(destination: Busqueda(uid: self.uid,
+                                                                     user: self.user,
+                                                                     isLogin: self.isLogin)
+                                                                     //textoBusqueda: paradaUno
+                                    .navigationBarTitle("", displayMode: .inline)) {
+                                        Text("Buscar")
+                                            .frame(width: 250, height: 40, alignment: .center)
+                                            .background(Color.blue.opacity(0.9), in: RoundedRectangle(cornerRadius: 6))
+                                            .padding(.top, -5)
+                                            .foregroundColor(.white)
+                                    }
+                            }
+                                               
                             TextField("Segunda parada", text: $paradaDos)
                                 .disableAutocorrection(true)
                             
@@ -141,6 +162,7 @@ struct Navegacion2_Previews: PreviewProvider {
         let uid = "wFN8MaVR6BYt0CbFRVg4161agLJ2"
         let u: String = "nombre"
         let l: Bool = true
-        Navegacion2(uid: uid, user: u, isLogin: l)
+        let tmp = MKMapItem()
+        Navegacion2(uid: uid, user: u, isLogin: l, tmpMKMapItem: tmp)
     }
 }
