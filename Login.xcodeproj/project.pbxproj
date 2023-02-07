@@ -18,6 +18,7 @@
 		C1AAB47C299243E30029316A /* MKCoordinateRegion+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AAB47B299243E30029316A /* MKCoordinateRegion+Extensions.swift */; };
 		C1AAB47F299244580029316A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AAB47E299244580029316A /* LocationManager.swift */; };
 		C1AAB4812992450A0029316A /* Busqueda.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AAB4802992450A0029316A /* Busqueda.swift */; };
+		C1AAB487299280300029316A /* alv.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AAB486299280300029316A /* alv.swift */; };
 		C1C103BF298E217B006AD2D1 /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C103BE298E217B006AD2D1 /* LocationDataManager.swift */; };
 		C1C103C3298EEF37006AD2D1 /* locations.json in Resources */ = {isa = PBXBuildFile; fileRef = C1C103C2298EEF37006AD2D1 /* locations.json */; };
 		F4B7355B2991C6E900E47F6C /* HView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B7355A2991C6E900E47F6C /* HView.swift */; };
@@ -44,6 +45,7 @@
 		C1AAB47B299243E30029316A /* MKCoordinateRegion+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MKCoordinateRegion+Extensions.swift"; sourceTree = "<group>"; };
 		C1AAB47E299244580029316A /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		C1AAB4802992450A0029316A /* Busqueda.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Busqueda.swift; sourceTree = "<group>"; };
+		C1AAB486299280300029316A /* alv.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alv.swift; sourceTree = "<group>"; };
 		C1C103BE298E217B006AD2D1 /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
 		C1C103C2298EEF37006AD2D1 /* locations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = locations.json; sourceTree = "<group>"; };
 		F4B7355A2991C6E900E47F6C /* HView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HView.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				C17BCF96298DDC6F005746C2 /* Navegacion.swift */,
 				C195E08E29918A4100F4DE8B /* Navegacion2.swift */,
 				C1AAB4802992450A0029316A /* Busqueda.swift */,
+				C1AAB486299280300029316A /* alv.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				C1AAB47A299243D50029316A /* SearchResultsViewModel.swift in Sources */,
 				F72F40BB298B38EC00B20073 /* AppDelegate.swift in Sources */,
 				F7BCA994298333D000EB462B /* AuthContentView.swift in Sources */,
+				C1AAB487299280300029316A /* alv.swift in Sources */,
 				C1C103BF298E217B006AD2D1 /* LocationDataManager.swift in Sources */,
 				C1AAB47C299243E30029316A /* MKCoordinateRegion+Extensions.swift in Sources */,
 				C17BCF9C298DDC70005746C2 /* Fondo.swift in Sources */,

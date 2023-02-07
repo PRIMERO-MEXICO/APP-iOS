@@ -14,27 +14,31 @@ import Firebase
 
 struct mapView: UIViewRepresentable {
     
-    @State var uid: String
-    @State var usuario: String
-    @State var isLogin: Bool
-    var checkpoints: [NavegacionModelo.Checkpoint]
-    // ubicación inicial centro cdmx
-    var centro: MKCoordinateRegion
+    typealias UIViewType = MKMapView
     
-    @State var paradaUno: String
-    @State var paradaDos: String
-    @State var directions: [String] = []
+    @Binding var directions: [String]
     
     func makeCoordinator() -> Coordinator {
         return Coordinator(parent: self, user: self.usuario, uid: self.uid)
     }
     
-    let map = MKMapView()
+    @State var uid: String
+    @State var usuario: String
+    @State var isLogin: Bool
+    var checkpoints: [NavegacionModelo.Checkpoint]
+    var centro: MKCoordinateRegion
+    @State var paradaUno: MKMapItem
+    @State var paradaDos: MKMapItem
+
+
     var manager = CLLocationManager()
     
     // MARK: - CONFORMING TO UIVIEWREPRESENTABLE
     /// 4. This one overriding function from UIViewRepresentable to return the expected view
     func makeUIView(context: Context) -> MKMapView {
+        
+        let map = MKMapView()
+        map.delegate = context.coordinator
         
         manager.delegate = context.coordinator
         manager.startUpdatingLocation()
@@ -43,53 +47,34 @@ struct mapView: UIViewRepresentable {
         map.setRegion(centro, animated: true)
         
         
-        // Casa de los azulejos
-        let p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4352, longitude: -99.1412))
+        // Dirección 1
+        let p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: (self.paradaUno.placemark.location?.coordinate.latitude)!, longitude: (self.paradaUno.placemark.location?.coordinate.longitude)!))
 
-        // Bellas artes
-        let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4343, longitude: -99.1402))
+        // Dirección 2
+        let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: (self.paradaDos.placemark.location?.coordinate.latitude)!, longitude: (self.paradaDos.placemark.location?.coordinate.longitude)!))
         
-        /*
-        var P1 = MKMapItem()
-        var P2 = MKMapItem()
-        
-        let searchRequestParadaUno = MKLocalSearch.Request()
-        searchRequestParadaUno.naturalLanguageQuery = self.paradaUno
-        
-        let searchRequestParadaDos = MKLocalSearch.Request()
-        searchRequestParadaDos.naturalLanguageQuery = self.paradaDos
-        
-        let search1 = MKLocalSearch(request: searchRequestParadaUno)
-        let search2 = MKLocalSearch(request: searchRequestParadaDos)
-        
-        search1.start { response, error in
-            guard let response = response else {
-                print("Error: \(error?.localizedDescription ?? "Unknown error").")
-                return
-            }
-            
-            P1 = response.mapItems.last!
-        }
-        
-        search2.start { response, error in
-            guard let response = response else {
-                print("Error: \(error?.localizedDescription ?? "Unknown error").")
-                return
-            }
-            
-            P2 = response.mapItems.last!
-        }
-         
-         let request = createDirectionsRequest(from: P1.placemark, to: P2.placemark)
-         
-        */
         
         // Function that creates Direction Request
-        let request = createDirectionsRequest(from: p1, to: p2)
+        let request = MKDirections.Request()
+        request.source = MKMapItem(placemark: p1)
+        request.destination = MKMapItem(placemark: p2)
+        request.transportType = .automobile
+        request.requestsAlternateRoutes = true
+        
+        // createDirectionsRequest(from: p1, to: p2)
 
         let Directions = MKDirections(request: request)
         
-
+        Directions.calculate { response, error in
+            guard let route = response?.routes.first else { return }
+            map.addAnnotations([p1, p2])
+            map.addOverlay(route.polyline)
+            map.setVisibleMapRect(
+                route.polyline.boundingMapRect,
+                edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
+                animated: true)
+            self.directions = route.steps.map { $0.instructions }.filter { !$0.isEmpty }
+        }
         
         
         return map
@@ -99,60 +84,62 @@ struct mapView: UIViewRepresentable {
         uiView.addAnnotations(checkpoints)
     }
     
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = .systemBlue
-        renderer.lineWidth = 5
-        return renderer
-    }
-    
 
-}
+    class Coordinator: NSObject, CLLocationManagerDelegate, MKMapViewDelegate {
+        
+        var parent: mapView
+        var user: String
+        var uid: String
+        
+        init(parent: mapView, user: String, uid: String) {
+            self.parent = parent
+            self.user = user
+            self.uid = uid
+        }
+        
+        func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+            switch status {
+            case .authorizedWhenInUse:
+                //authorizationStatus = .authorizedWhenInUse
+                //locationManager.requestLocation()
+                break
+                
+            case .restricted, .denied:
+                //authorizationStatus = .denied
+                break
+                
+            case .notDetermined:
+                //authorizationStatus = .notDetermined
+                manager.requestWhenInUseAuthorization()
+                break
+                
+            default:
+                break
+            }
+        }
+        
+        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            
+            let last = locations.last
 
-class Coordinator: NSObject, CLLocationManagerDelegate {
-    
-    var parent: mapView
-    var user: String
-    var uid: String
-    
-    init(parent: mapView, user: String, uid: String) {
-        self.parent = parent
-        self.user = user
-        self.uid = uid
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedWhenInUse:
-            //authorizationStatus = .authorizedWhenInUse
-            //locationManager.requestLocation()
-            break
+            //print(last?.coordinate.latitude)
             
-        case .restricted, .denied:
-            //authorizationStatus = .denied
-            break
-            
-        case .notDetermined:
-            //authorizationStatus = .notDetermined
-            manager.requestWhenInUseAuthorization()
-            break
-            
-        default:
-            break
+            let ref: DatabaseReference! = Database.database().reference()
+            ref.child("Users").child(self.uid).child("latitud").setValue(last?.coordinate.latitude.description)
+            ref.child("Users").child(self.uid).child("longitud").setValue(last?.coordinate.longitude.description)
+        }
+        
+        
+        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = .systemBlue
+            renderer.lineWidth = 5
+            return renderer
         }
     }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        let last = locations.last
-
-        //print(last?.coordinate.latitude)
-        
-        let ref: DatabaseReference! = Database.database().reference()
-        ref.child("Users").child(self.uid).child("latitud").setValue(last?.coordinate.latitude.description)
-        ref.child("Users").child(self.uid).child("longitud").setValue(last?.coordinate.longitude.description)
-    }
 }
+
+
 
 
 
@@ -160,19 +147,22 @@ class Coordinator: NSObject, CLLocationManagerDelegate {
 struct Navegacion: View {
 
     @ObservedObject var navegacionViewModel = NavegacionViewModel()
+    
     @State private var directions: [String] = []
     @State private var showDirections = false
+    
     @State var uid: String
     @State var user: String
     @State var isLogin: Bool
-    @State var paradaUno: String
-    @State var paradaDos: String
+    @State var paradaUno: MKMapItem
+    @State var paradaDos: MKMapItem
     @State var centro: MKCoordinateRegion
 
     
     var body: some View {
         VStack {
-            mapView(uid: self.uid,
+            mapView(directions: $directions,
+                    uid: self.uid,
                     usuario: self.user,
                     isLogin: self.isLogin,
                     checkpoints: navegacionViewModel.checkpoints,

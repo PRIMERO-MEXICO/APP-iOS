@@ -167,24 +167,24 @@ struct Navegacion2: View {
                             }
                             
                             
-                            if tag != "" {
-                                NavigationLink(destination: Navegacion(uid: self.uid,
-                                                                       user: self.user,
-                                                                       isLogin: self.isLogin,
-                                                                       paradaUno: self.paradaUno,
-                                                                       paradaDos: self.paradaDos,
-                                                                       centro: MKCoordinateRegion(
-                                                                        center: CLLocationCoordinate2D(latitude: (self.locationDataManager.locationManager.location?.coordinate.latitude)!, longitude: (self.locationDataManager.locationManager.location?.coordinate.longitude)!),
-                                                                        span: MKCoordinateSpan(latitudeDelta: 0.4, longitudeDelta: 0.4)
-                                                                       ))
-                                    .navigationBarTitle("", displayMode: .inline)) {
-                                        Text("Navegar")
-                                            .frame(width: 250, height: 40, alignment: .center)
-                                            .background(Color.blue.opacity(0.9), in: RoundedRectangle(cornerRadius: 6))
-                                            .padding(.top, 20)
-                                            .foregroundColor(.white)
-                                    }
-                            }
+    if tag != "" {
+        NavigationLink(destination: Navegacion(uid: self.uid,
+                                                user: self.user,
+                                                isLogin: self.isLogin,
+                                                paradaUno: self.tmpMKMapItem,
+                                                paradaDos: self.tmpMKMapItem2,
+                                                centro: MKCoordinateRegion(
+                                                center: CLLocationCoordinate2D(latitude: (self.locationDataManager.locationManager.location?.coordinate.latitude)!, longitude: (self.locationDataManager.locationManager.location?.coordinate.longitude)!),
+                                                span: MKCoordinateSpan(latitudeDelta: 0.4, longitudeDelta: 0.4)
+                                                ))
+            .navigationBarTitle("", displayMode: .inline)) {
+                Text("Navegar")
+                    .frame(width: 250, height: 40, alignment: .center)
+                    .background(Color.blue.opacity(0.9), in: RoundedRectangle(cornerRadius: 6))
+                    .padding(.top, 20)
+                    .foregroundColor(.white)
+            }
+    }
                         }
                         .textFieldStyle(.roundedBorder)
                         .padding(.horizontal, 50)
