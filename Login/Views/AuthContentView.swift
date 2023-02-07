@@ -27,14 +27,14 @@ struct Login: View{
     @State var visible = false
     @State var alert = false
     @State var error = ""
+    @State var uid = ""
     
     // Mantiene estado para verificar si un usuario inició sesión
     @State var isLogin = false
     
     var body: some View{
         if isLogin {
-            Navegacion2(user: self.user, isLogin: self.isLogin)
-            // Main(user: self.user, isLogin: true)
+            HView(user: self.user, isLogin: true, uid: self.uid)
         } else {
             ZStack{
                 ZStack(alignment: .center){
@@ -131,6 +131,8 @@ struct Login: View{
         Auth.auth().signIn(withEmail: user, password: passwd) { (authResult, error) in
             if let user = authResult?.user {
                 print(user)
+                self.uid = user.uid
+                self.user = user.providerID
                 completionBlock(true)
             }
             else{
@@ -199,3 +201,17 @@ struct ContentView_Previews: PreviewProvider {
 
     }
 }
+
+
+/*
+ Directions.calculate { response, error in
+     guard let route = response?.routes.first else { return }
+     map.addAnnotations([P1, P2])
+     map.addOverlay(route.polyline)
+     map.setVisibleMapRect(
+         route.polyline.boundingMapRect,
+         edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
+         animated: true)
+     directions = route.steps.map { $0.instructions }.filter { !$0.isEmpty }
+ }
+ */

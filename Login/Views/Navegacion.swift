@@ -14,19 +14,19 @@ import Firebase
 
 struct mapView: UIViewRepresentable {
     
-    var usuario: String
+    @State var uid: String
+    @State var usuario: String
+    @State var isLogin: Bool
     var checkpoints: [NavegacionModelo.Checkpoint]
     // ubicación inicial centro cdmx
-    var centro = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 19.4326, longitude: -99.1332),
-        span: MKCoordinateSpan(latitudeDelta: 0.4, longitudeDelta: 0.4)
-      )
-    @State private var paradaUno: String = ""
-    @State private var paradaDos: String = ""
+    var centro: MKCoordinateRegion
+    
+    @State var paradaUno: String
+    @State var paradaDos: String
     @State var directions: [String] = []
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(parent1: self, user1: self.usuario)
+        return Coordinator(parent: self, user: self.usuario, uid: self.uid)
     }
     
     let map = MKMapView()
@@ -49,21 +49,42 @@ struct mapView: UIViewRepresentable {
         // Bellas artes
         let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4343, longitude: -99.1402))
         
+        var P1 = MKMapItem()
+        var P2 = MKMapItem()
+        
+        let searchRequestParadaUno = MKLocalSearch.Request()
+        searchRequestParadaUno.naturalLanguageQuery = self.paradaUno
+        
+        let searchRequestParadaDos = MKLocalSearch.Request()
+        searchRequestParadaDos.naturalLanguageQuery = self.paradaDos
+        
+        let search1 = MKLocalSearch(request: searchRequestParadaUno)
+        let search2 = MKLocalSearch(request: searchRequestParadaDos)
+        
+        search1.start { response, error in
+            guard let response = response else {
+                print("Error: \(error?.localizedDescription ?? "Unknown error").")
+                return
+            }
+            
+            P1 = response.mapItems.last!
+        }
+        
+        search2.start { response, error in
+            guard let response = response else {
+                print("Error: \(error?.localizedDescription ?? "Unknown error").")
+                return
+            }
+            
+            P2 = response.mapItems.last!
+        }
+        
         // Function that creates Direction Request
-        let request = createDirectionsRequest(from: p1, to: p2)
+        let request = createDirectionsRequest(from: P1.placemark, to: P2.placemark)
 
         let Directions = MKDirections(request: request)
         
-        Directions.calculate { response, error in
-            guard let route = response?.routes.first else { return }
-            map.addAnnotations([p1, p2])
-            map.addOverlay(route.polyline)
-            map.setVisibleMapRect(
-                route.polyline.boundingMapRect,
-                edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
-                animated: true)
-            directions = route.steps.map { $0.instructions }.filter { !$0.isEmpty }
-        }
+
         
         
         return map
@@ -87,10 +108,12 @@ class Coordinator: NSObject, CLLocationManagerDelegate {
     
     var parent: mapView
     var user: String
+    var uid: String
     
-    init(parent1: mapView, user1: String) {
-        parent = parent1
-        user = user1
+    init(parent: mapView, user: String, uid: String) {
+        self.parent = parent
+        self.user = user
+        self.uid = uid
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -121,10 +144,12 @@ class Coordinator: NSObject, CLLocationManagerDelegate {
         //print(last?.coordinate.latitude)
         
         let ref: DatabaseReference! = Database.database().reference()
-        ref.child("Users").child(self.user).child("latitud").setValue(last?.coordinate.latitude.description)
-        ref.child("Users").child(self.user).child("longitud").setValue(last?.coordinate.longitude.description)
+        ref.child("Users").child(self.uid).child("latitud").setValue(last?.coordinate.latitude.description)
+        ref.child("Users").child(self.uid).child("longitud").setValue(last?.coordinate.longitude.description)
     }
 }
+
+
 
 /// Once this has been set up now we can easily use the MapView on our SwiftUI.
 struct Navegacion: View {
@@ -132,13 +157,23 @@ struct Navegacion: View {
     @ObservedObject var navegacionViewModel = NavegacionViewModel()
     @State private var directions: [String] = []
     @State private var showDirections = false
+    @State var uid: String
     @State var user: String
     @State var isLogin: Bool
+    @State var paradaUno: String
+    @State var paradaDos: String
+    @State var centro: MKCoordinateRegion
+
     
     var body: some View {
         VStack {
-            mapView(usuario: self.user,
-                    checkpoints: navegacionViewModel.checkpoints)
+            mapView(uid: self.uid,
+                    usuario: self.user,
+                    isLogin: self.isLogin,
+                    checkpoints: navegacionViewModel.checkpoints,
+                    centro: self.centro,
+                    paradaUno: self.paradaUno,
+                    paradaDos: self.paradaDos)
             
             Button(action: {
                 self.showDirections.toggle()
@@ -184,17 +219,18 @@ func createDirectionsRequest(from coordinateFrom: MKPlacemark!, to coordinateTo:
 
 
 
-
-
-
     
-    
+    /*
 
 struct Navegacion_Previews: PreviewProvider {
   static var previews: some View {
       
       let u: String = "nombre"
       let l: Bool = true
+      let p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4352, longitude: -99.1412))
+
+      let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4343, longitude: -99.1402))
       Navegacion(user: u, isLogin: l)
   }
 }
+*/

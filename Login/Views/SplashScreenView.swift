@@ -17,8 +17,8 @@ struct SplashScreenView: View {
     
     var body: some View {
         if isActive {
-            Navegacion2(user: "yo", isLogin: true)
-            //AuthContentView()
+            AuthContentView()
+            // HView()
             // CoreLocationView()
             // Main(user: "hola", isLogin: true)
         } else {
