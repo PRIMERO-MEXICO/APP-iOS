@@ -19,6 +19,7 @@
 		C1C103C829903B83006AD2D1 /* RouteBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C103C729903B83006AD2D1 /* RouteBuilder.swift */; };
 		C1C103CA29903DEA006AD2D1 /* RouteAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C103C929903DEA006AD2D1 /* RouteAnnotation.swift */; };
 		C1C103CC29903DEE006AD2D1 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C103CB29903DEE006AD2D1 /* Route.swift */; };
+		F4B7355B2991C6E900E47F6C /* HView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B7355A2991C6E900E47F6C /* HView.swift */; };
 		F72F40BB298B38EC00B20073 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72F40BA298B38EC00B20073 /* AppDelegate.swift */; };
 		F7BCA992298333D000EB462B /* LoginApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BCA991298333D000EB462B /* LoginApp.swift */; };
 		F7BCA994298333D000EB462B /* AuthContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BCA993298333D000EB462B /* AuthContentView.swift */; };
@@ -44,6 +45,7 @@
 		C1C103C729903B83006AD2D1 /* RouteBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteBuilder.swift; sourceTree = "<group>"; };
 		C1C103C929903DEA006AD2D1 /* RouteAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteAnnotation.swift; sourceTree = "<group>"; };
 		C1C103CB29903DEE006AD2D1 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		F4B7355A2991C6E900E47F6C /* HView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HView.swift; sourceTree = "<group>"; };
 		F72F40BA298B38EC00B20073 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F7BCA98E298333D000EB462B /* Login.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Login.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7BCA991298333D000EB462B /* LoginApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginApp.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				C17BCF96298DDC6F005746C2 /* Navegacion.swift */,
 				C17BCF97298DDC6F005746C2 /* Main.swift */,
 				C1C103C0298E35D0006AD2D1 /* CoreLocationView.swift */,
+				F4B7355A2991C6E900E47F6C /* HView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1C103C1298E35D0006AD2D1 /* CoreLocationView.swift in Sources */,
+				F4B7355B2991C6E900E47F6C /* HView.swift in Sources */,
 				C17BCF9E298DDC70005746C2 /* Main.swift in Sources */,
 				C17BCF9B298DDC70005746C2 /* SplashScreenView.swift in Sources */,
 				F72F40BB298B38EC00B20073 /* AppDelegate.swift in Sources */,

@@ -16,7 +16,7 @@ struct LoginApp: App {
     
     var body: some Scene {
         WindowGroup {
-            SplashScreenView()
+            HView()
         }
     }
 }
