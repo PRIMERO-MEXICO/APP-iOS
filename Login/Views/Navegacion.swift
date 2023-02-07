@@ -49,6 +49,7 @@ struct mapView: UIViewRepresentable {
         // Bellas artes
         let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4343, longitude: -99.1402))
         
+        /*
         var P1 = MKMapItem()
         var P2 = MKMapItem()
         
@@ -78,9 +79,13 @@ struct mapView: UIViewRepresentable {
             
             P2 = response.mapItems.last!
         }
+         
+         let request = createDirectionsRequest(from: P1.placemark, to: P2.placemark)
+         
+        */
         
         // Function that creates Direction Request
-        let request = createDirectionsRequest(from: P1.placemark, to: P2.placemark)
+        let request = createDirectionsRequest(from: p1, to: p2)
 
         let Directions = MKDirections(request: request)
         
@@ -222,15 +227,15 @@ func createDirectionsRequest(from coordinateFrom: MKPlacemark!, to coordinateTo:
     
     /*
 
-struct Navegacion_Previews: PreviewProvider {
-  static var previews: some View {
-      
-      let u: String = "nombre"
-      let l: Bool = true
-      let p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4352, longitude: -99.1412))
+     struct Navegacion_Previews: PreviewProvider {
+       static var previews: some View {
+           
+           let u: String = "nombre"
+           let l: Bool = true
+           let p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4352, longitude: -99.1412))
 
-      let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4343, longitude: -99.1402))
-      Navegacion(user: u, isLogin: l)
-  }
-}
+           let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4343, longitude: -99.1402))
+           Navegacion(user: u, isLogin: l)
+       }
+     }
 */

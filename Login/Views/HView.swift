@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import MapKit
 
 struct HView: View {
     
@@ -64,7 +65,7 @@ struct HView: View {
                     
                     NavigationLink(destination: Navegacion2(uid: self.uid,
                                                             user: self.user,
-                                                            isLogin: self.isLogin)) {
+                                                            isLogin: self.isLogin, tmpMKMapItem: MKMapItem())) {
                         MenuDesign(text: "rutas de traslado", icon: "mappin.square", color: Color(red: 255 / 255, green: 255 / 255, blue: 204 / 255))
                         
                     }
