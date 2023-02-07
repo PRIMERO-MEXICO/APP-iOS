@@ -46,12 +46,21 @@ struct mapView: UIViewRepresentable {
         manager.requestWhenInUseAuthorization()
         map.setRegion(centro, animated: true)
         
+        // Dirección 1
+        let p0 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4284, longitude: -99.1544))
+
+        // Dirección 2
+        let p3 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4044, longitude: -99.1444))
+        
         
         // Dirección 1
         let p1 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: (self.paradaUno.placemark.location?.coordinate.latitude)!, longitude: (self.paradaUno.placemark.location?.coordinate.longitude)!))
 
         // Dirección 2
         let p2 = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: (self.paradaDos.placemark.location?.coordinate.latitude)!, longitude: (self.paradaDos.placemark.location?.coordinate.longitude)!))
+        
+        // Empresa
+        let F = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 19.4244, longitude: -99.1744))
         
         
         // Function that creates Direction Request
@@ -73,9 +82,65 @@ struct mapView: UIViewRepresentable {
                 route.polyline.boundingMapRect,
                 edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
                 animated: true)
+        }
+        
+        let request2 = MKDirections.Request()
+        request.source = MKMapItem(placemark: p2)
+        request.destination = MKMapItem(placemark: F)
+        request.transportType = .automobile
+        request.requestsAlternateRoutes = true
+        
+        let Directions2 = MKDirections(request: request2)
+        
+        Directions2.calculate { response, error in
+            guard let route = response?.routes.first else { return }
+            map.addAnnotations([p1, F])
+            map.addOverlay(route.polyline)
+            map.setVisibleMapRect(
+                route.polyline.boundingMapRect,
+                edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
+                animated: true)
+        }
+        
+        let request3 = MKDirections.Request()
+        request.source = MKMapItem(placemark: p2)
+        request.destination = MKMapItem(placemark: F)
+        request.transportType = .automobile
+        request.requestsAlternateRoutes = true
+        
+        let Directions3 = MKDirections(request: request3)
+        
+        Directions3.calculate { response, error in
+            guard let route = response?.routes.first else { return }
+            map.addAnnotations([p1, F])
+            map.addOverlay(route.polyline)
+            map.setVisibleMapRect(
+                route.polyline.boundingMapRect,
+                edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
+                animated: true)
             self.directions = route.steps.map { $0.instructions }.filter { !$0.isEmpty }
         }
         
+        // Function that creates Direction Request
+        let request4 = MKDirections.Request()
+        request.source = MKMapItem(placemark: p0)
+        request.destination = MKMapItem(placemark: p3)
+        request.transportType = .automobile
+        request.requestsAlternateRoutes = true
+        
+        // createDirectionsRequest(from: p1, to: p2)
+
+        let Directions4 = MKDirections(request: request)
+        
+        Directions4.calculate { response, error in
+            guard let route = response?.routes.first else { return }
+            map.addAnnotations([p0, p3])
+            map.addOverlay(route.polyline)
+            map.setVisibleMapRect(
+                route.polyline.boundingMapRect,
+                edgePadding: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
+                animated: true)
+        }
         
         return map
     }
