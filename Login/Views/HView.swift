@@ -158,7 +158,7 @@ struct InfoRelevanteView: View {
     
     func workStartDisplay(_ hour: String) -> String {
         let hours = ["12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"]
-        let compliments = ["Time to get to work!", "Let's get productive!", "Rise and shine!", "It's a great day to work!", "Ready, set, work!", "Work smarter, not harder!"]
+        let compliments = ["¡Ya casi!", "¿Ya sonreíste?", "¡Tú puedes!", "¡Hazlo un buen día!", "¡Trabaja duro!", "¡Falta poco!"]
         
         if let enteredHour = Int(hour), enteredHour >= 0, enteredHour <= 23 {
             let formattedHour = hours[enteredHour % 12]
